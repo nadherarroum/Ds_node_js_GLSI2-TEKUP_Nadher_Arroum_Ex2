@@ -1,14 +1,3 @@
-getUser(1).then(function () {
-    getRepositories(2)
-}).then(function () {
-    getBrunch()
-}).then(function (brunch) {
-    //if(brunch == "master")
-        postCommit('new Version').then(()=>{
-            //if(commited)
-                console.log("The new version is commited");
-        })
-}).then(console.log("The new version is not commited"))
 
 function getUser(id){
     return new Promise((resolve, reject)=>{
@@ -47,3 +36,19 @@ function postCommit(vers) {
         }, 2000);
     });
 }
+
+async function run(){
+    let user = await getUser(1).then(function () {
+        getRepositories(2)
+        }).then(function () {
+            getBrunch()
+        }).then(function (brunch) {
+            //if(brunch == "master")
+                postCommit('new Version').then(()=>{
+                    //if(commited)
+                        console.log("The new version is commited");
+                })
+        }).then(console.log("The new version is not commited"));
+}
+
+run();
